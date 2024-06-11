@@ -1,8 +1,8 @@
 import os
 os.system('cls' if os.name == 'nt' else 'clear')
-
+'''
 saludo = "hola_mundo"
-#print(saludo.index('o',5,10))
+print(saludo.index('o',5,10))
 
 try: # Capturador de errores
     print(saludo.index('o',4,7))
@@ -34,3 +34,39 @@ print(saludo[2::2]) # imprime de 2 en 2
 
 saludo = saludo[::-1] # invertir la cadena
 print(saludo[::-1]) # imprime al reves
+
+print("hola mundoooooooo".count("hola1")) # Cuenta las ocurrencias de una subcadena
+
+mensaje = "hola 12345"
+
+numero = "12345"
+decimales = "12345.555"
+
+print(mensaje.isdigit())
+print(numero.isdigit())
+print(decimales.isdigit()) # Devuelve True si todos los caracteres de la cadena son enteros
+
+print(mensaje.isnumeric())
+print(numero.isnumeric())
+print(decimales.isnumeric()) # Devuelve True si todos los caracteres de la cadena son numericos
+
+print(mensaje.isdecimal())
+print(numero.isdecimal())
+print(decimales.isdecimal()) # Devuelve True si todos los caracteres de la cadena son decimales
+
+print(mensaje.isalnum())
+print(mensaje2.isalnum()) # Algunos caracteres no son alfanúmericos
+
+mensaje2 = "hola mundo"
+mensaje3 = mensaje2.replace("hola", "hello") # Reemplaza una subcadena por otra
+
+print(mensaje3)
+'''
+
+#mensaje = "adios mundo cruel"
+#print(mensaje.split(" ")) # Divide la cadena por una subcadena
+nombre = "Tomy*Jose*Montufar*Zuniga"
+nombre2 = nombre.replace("*", " ")
+print(nombre2)
+#print(nombre.split("*"))
+#print(nombre.count("*"))

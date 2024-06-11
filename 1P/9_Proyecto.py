@@ -396,6 +396,22 @@ departamentos_municipios = {
     - TOMY JOSE MONTUFAR ZUNIGA
 '''
 
+# Implementar ciclos for para ver municipios, departamentos, etc.
+
+contraseña_correcta = "Ponka y Cosita"
+intentos_restantes = 3
+while intentos_restantes > 0:
+    contraseña = input("Ingrese la contraseña: ")
+    if contraseña == contraseña_correcta:
+        print("Contraseña correcta. Acceso permitido.")
+        break
+    else:
+        intentos_restantes -= 1
+        print(f"Contraseña incorrecta. Intentos restantes: {intentos_restantes}")
+else:
+    print("Demasiados intentos fallidos. Acceso denegado.")
+    exit()
+
 while True:
     import os
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -416,6 +432,12 @@ while True:
             print("Departamento: ", departamentos_municipios[id_departamento]['nombre'])    
             print("Municipio: ", departamentos_municipios[id_departamento]['municipios'][id_municipio])
             print("Edad: ",edad, " años")
+            if(edad>=21):
+                print("Eres mayor de edad")
+            elif(edad>=18):
+                print("Eres ciudadano")
+            else:
+                print("Eres menor de edad")
 
     continuar = input("¿Deseas continuar? (s/n): ")
     if continuar.lower() != 's':
