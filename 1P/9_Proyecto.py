@@ -394,51 +394,166 @@ departamentos_municipios = {
     - DIANY LIZBETH ENAMORADO FERNANDEZ
     - ANDERSON JAIR GARCIA MENJIVAR
     - TOMY JOSE MONTUFAR ZUNIGA
+    - ANROLD STANLY FORD MADRID
 '''
+import bcrypt
+pwd = bytes('pololo', 'utf-8')
+sal = bcrypt.gensalt()
+encriptado = bcrypt.hashpw(pwd, sal)
 
-# Implementar ciclos for para ver municipios, departamentos, etc.
-
-contraseña_correcta = "Ponka y Cosita"
-intentos_restantes = 3
-while intentos_restantes > 0:
-    contraseña = input("Ingrese la contraseña: ")
-    if contraseña == contraseña_correcta:
-        print("Contraseña correcta. Acceso permitido.")
-        break
-    else:
-        intentos_restantes -= 1
-        print(f"Contraseña incorrecta. Intentos restantes: {intentos_restantes}")
-else:
-    print("Demasiados intentos fallidos. Acceso denegado.")
-    exit()
-
-while True:
+def limpiar():
     import os
     os.system('cls' if os.name == 'nt' else 'clear')
 
-    dni = input("Ingrese su numero de identidad: ")
+def Ejercicio4():
+    # Ejercicio 4: Escribir un programa que pida al usuario un numero entero y muestre por pantalla si
+    # es par o impar.
+    numero = 0
+    while True:
+        import os
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("Ejercicio 4: Escribir un programa que pida al usuario un numero entero y")
+        print("muestre por pantalla si es par o impar.")
+        numero = int(input("Ingrese un numero entero (-1: salir): "))
 
-    if not dni.isdigit() or len(dni) != 13:
-        print("Numero de identidad invalido, intente de nuevo (13 digitos y solo enteros)")
-    else:
-        id_departamento = dni[0:2]
-        id_municipio = dni[2:4]
-        id_anionacimiento = dni[4:8]
-        edad = 2024 - int(id_anionacimiento)
-
-        if not id_departamento in departamentos_municipios:
-            print("Departamento y municipio no encontrado.")
+        if numero == -1:
+            break
+        
+        if numero % 2 == 0:
+            print("El numero ",numero," es par.")
         else:
-            print("Departamento: ", departamentos_municipios[id_departamento]['nombre'])    
-            print("Municipio: ", departamentos_municipios[id_departamento]['municipios'][id_municipio])
-            print("Edad: ",edad, " años")
-            if(edad>=21):
-                print("Eres mayor de edad")
-            elif(edad>=18):
-                print("Eres ciudadano")
-            else:
-                print("Eres menor de edad")
+            print("El numero ",numero," es impar.")
+        
+        input("Presione Enter para continuar...")
 
-    continuar = input("¿Deseas continuar? (s/n): ")
-    if continuar.lower() != 's':
+def Ejercicio14():
+    # Ejercicio 14: Escribir un programa que pida al usuario un numero entero positivo y muestre por
+    # pantalla la cuenta atras desde ese numero hasta cero.
+    while True:
+        import os
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("Ejercicio 14: Escribir un programa que pida al usuario un numero entero positivo")
+        print("y muestre por pantalla la cuenta atras desde ese numero hasta cero.")
+        entero = int(input("Ingrese un numero entero positivo (-1: salir): "))
+
+        if entero == -1:
+            break
+
+        if entero <= 0:
+            print("El numero ingresado debe ser mayor que 0, intentelo de nuevo...")
+            input("Presione Enter para continuar...")
+        else:
+            while entero != -1:
+                print(entero)
+                entero -= 1
+            input("Presione Enter para continuar...")
+    
+limpiar()
+
+usuario_correcto = "tomy"
+intentos = 3
+# Acceder al programa
+while intentos > 0:
+    limpiar()
+    usuario = input("Ingrese su usuario: ")
+    contraseña = bytes(input("Ingrese su contraseña: "), 'utf-8')
+
+    if usuario == usuario_correcto and bcrypt.checkpw(contraseña, encriptado):
+        print("Bienvenido al programa")
+        print(encriptado)
         break
+    else:
+        intentos -= 1
+        print("Usuario o contraseña incorrecta, intente de nuevo (",intentos," restantes)")
+        input("Presione Enter para intentarlo de nuevo...") 
+else:
+    limpiar()
+    print("Ha excedido el numero de intentos permitidos.")
+    exit()
+
+# Menu principal
+while True:
+    limpiar()
+    print("Bienvenido al programa")
+    print("1. Inspeccionar departamentos y muncipios.")
+    print("2. Ingresar su cedula.")
+    print("3. Ejercicios del Examen IP")
+    print("4. Salir.")
+    selec = input("Elija una opcion: ")
+
+    # Inspeccionar departamentos y municipios
+    if selec == '1':
+        limpiar()
+        id = input("Ingrese el numero de departamento para ver sus municipios y su codigo (ejemplo 16): ")
+        if not id.isdigit() or len(id) != 2:
+            print("Codigo no valido, por favor intente de nuevo. (2 digitos y solo enteros)")
+            input("Presione Enter para continuar...")
+        else:
+            if id not in departamentos_municipios:
+                print("Departamento no encontrado.")
+                input("Presione Enter para continuar...")
+            else:
+                print("Departamento encontrado: ", departamentos_municipios[id]['nombre'])
+                print("-----------------------------------------------------")
+                print("Codigo\t\t Municipio")
+                print("-----------------------------------------------------")
+                for municipio in departamentos_municipios[id]['municipios']:
+                    print(municipio,"\t\t",departamentos_municipios[id]['municipios'][municipio])
+                    
+                input("Presione Enter para continuar...")
+    # Ingresar su cedula
+    elif selec == '2':
+        limpiar()
+        dni = input("Ingrese su numero de identidad: ")
+
+        if not dni.isdigit() or len(dni) != 13:
+            print("Numero de identidad invalido, intente de nuevo (13 digitos y solo enteros)")
+            input("Presione Enter para continuar...")
+        else:
+            id_departamento = dni[0:2]
+            id_municipio = dni[2:4]
+            id_anionacimiento = dni[4:8]
+            edad = 2024 - int(id_anionacimiento)
+
+            if id_departamento not in departamentos_municipios or id_municipio not in departamentos_municipios[id_departamento]['municipios']:
+                print("Datos no encontrados.")
+                input("Presione Enter para continuar...")
+            else:
+                departamento = departamentos_municipios[id_departamento]
+                municipio = departamento['municipios'].get(id_municipio)
+                print("Departamento: ", departamento['nombre'])
+                print("Municipio: ", municipio)
+                print("Edad: ", edad, " años")
+
+                if(edad>=21):
+                    print("Eres mayor de edad")
+                elif(edad>=18):
+                    print("Eres ciudadano")
+                else:
+                    print("Eres menor de edad")
+
+                input("Presione Enter para continuar...")
+    # Ejercicios desarrollados durante el examen del I Parcial
+    elif selec == '3':
+        limpiar()
+        print("Que programa desea ver?")
+        print("1. Ejercicio 4")
+        print("2. Ejercicio 14")
+        opcion = input("Elija una opcion: ")
+
+        if opcion == '1':
+            Ejercicio4()
+        elif opcion == '2':
+            Ejercicio14()
+        else:
+            print("Opcion no valida, intente de nuevo.")
+            input("Presione Enter para continuar...")
+
+    # Salir
+    elif selec == '4':
+        limpiar()
+        print("Programa finalizado.")
+        exit()
+    else:
+        print("Opcion no valida, intente de nuevo.")
+        input("Presione Enter para continuar...")

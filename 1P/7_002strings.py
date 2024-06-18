@@ -1,6 +1,6 @@
 import os
 os.system('cls' if os.name == 'nt' else 'clear')
-'''
+
 saludo = "hola_mundo"
 print(saludo.index('o',5,10))
 
@@ -61,7 +61,7 @@ mensaje2 = "hola mundo"
 mensaje3 = mensaje2.replace("hola", "hello") # Reemplaza una subcadena por otra
 
 print(mensaje3)
-'''
+
 
 #mensaje = "adios mundo cruel"
 #print(mensaje.split(" ")) # Divide la cadena por una subcadena
